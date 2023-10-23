@@ -6,12 +6,12 @@
  *****************************************************************************/
 
 /******************************************************************************
-*
-* Observação: até a linha 121 os códigos foram retirados dos código-fonte
-* disponibilizados (graph_adjacency_list.c, graph.c/graph.h e utils.c).
-* O código desenvolvido para resolver o problema é a partir da linha 131.
-*
-******************************************************************************/
+ *
+ * Observação: até a linha 121 os códigos foram retirados dos código-fonte
+ * disponibilizados (graph_adjacency_list.c, graph.c/graph.h e utils.c).
+ * O código desenvolvido para resolver o problema é a partir da linha 131.
+ *
+ ******************************************************************************/
 
 #include <assert.h>
 #include <stdio.h>
@@ -126,24 +126,25 @@ int graph_neighbors(Graph G, Vertex u, Vertex *neigh) {
  *
  * Funções: DFS_cycle e main
  *
-******************************************************************************/
+ ******************************************************************************/
 
 // Por se tratar de uma DFS, só alguns comentários foram feitos
 int DFS_cycle(Graph G, Vertex s, int visitado[], int predecessor[]) {
   visitado[s] = 1;
-  Vertex vizinhos[graph_order(G)];
-  int n = graph_neighbors(G, s, vizinhos);
-  for (int i = 0; i < n; i++) {
-    if (visitado[vizinhos[i]] == 0) {
-      predecessor[vizinhos[i]] = s;
-      if (DFS_cycle(G, vizinhos[i], visitado, predecessor)) {
+  link vizinho = G->adj[s];
+  while (vizinho != NULL) {
+    Vertex p = vizinho->w;
+    if (visitado[p] == 0) {
+      predecessor[p] = s;
+      if (DFS_cycle(G, p, visitado, predecessor)) {
         return 1;
       }
 
-    // Se o vizinho já foi visitado e não é o predecessor, há um ciclo
-    } else if (predecessor[s] != vizinhos[i]) {
+      // Se o vizinho já foi visitado e não é o predecessor, há um ciclo
+    } else if (predecessor[s] != p) {
       return 1;
     }
+    vizinho = vizinho->next;
   }
   return 0;
 }

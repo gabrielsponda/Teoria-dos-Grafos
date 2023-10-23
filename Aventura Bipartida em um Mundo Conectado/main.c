@@ -126,38 +126,39 @@ int graph_neighbors(Graph G, Vertex u, Vertex *neigh) {
  *
  * Funções: DFS_odd_cycle e main
  *
-******************************************************************************/
+ ******************************************************************************/
 
 // Variáveis globais para armazenar o "início" e "fim" do ciclo ímpar
 Vertex u = -1, v = -1;
 
 // Por se tratar de uma DFS, só alguns comentários foram feitos
 int DFS_odd_cycle(Graph G, Vertex s, int visitado[], int predecessor[],
-              int biparticao[]) {
+                  int biparticao[]) {
   visitado[s] = 1;
-  Vertex vizinhos[graph_order(G)];
-  int n = graph_neighbors(G, s, vizinhos);
-  for (int i = 0; i < n; i++) {
-    if (visitado[vizinhos[i]] == 0) {
-      predecessor[vizinhos[i]] = s;
-      biparticao[vizinhos[i]] = !biparticao[s];
-      if (DFS_odd_cycle(G, vizinhos[i], visitado, predecessor, biparticao)) {
+  link vizinho = G->adj[s];
+  while (vizinho != NULL) {
+    Vertex p = vizinho->w;
+    if (visitado[p] == 0) {
+      predecessor[p] = s;
+      biparticao[p] = !biparticao[s];
+      if (DFS_odd_cycle(G, p, visitado, predecessor, biparticao)) {
         return 1;
       }
 
-    // Se o vértice já foi visitado e não é o predecessor, então existe um ciclo
-    // Se a bipartição do vértice atual e do vizinho forem iguais, ciclo ímpar.
-    } else if (predecessor[s] != vizinhos[i] &&
-               biparticao[s] == biparticao[vizinhos[i]]) {
+      // Se o vértice já foi visitado e não é o predecessor, então existe um
+      // ciclo Se a bipartição do vértice atual e do vizinho forem iguais, ciclo
+      // ímpar.
+    } else if (predecessor[s] != p && biparticao[s] == biparticao[p]) {
 
       // Assim que o ciclo ímpar é detectado, os vértices são armazenados
       // Podem até existir outros ciclos ímpares, mas apenas um é necessário
       if (u == -1) {
         u = s;
-        v = vizinhos[i];
+        v = p;
       }
       return 1;
     }
+    vizinho = vizinho->next;
   }
   return 0;
 }
@@ -229,6 +230,6 @@ int main() {
     }
     printf("%d ", u);
   }
-  
+
   return 0;
 }
