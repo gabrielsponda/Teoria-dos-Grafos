@@ -13,11 +13,6 @@ Os exercícios práticos são desenvolvidos conforme as especificações forneci
 
 As soluções dos exercícios devem ser submetidas através do Moodle nas datas estipuladas. Os enunciados estão disponíveis exclusivamente na plataforma Moodle da turma.
 
-### Estrutura do Repositório
-
-- `/exercicios`: Este diretório contém todos os exercícios práticos implementados em C.
-- `/resumos`: Aqui estão os resumos das aulas teóricas de Teoria dos Grafos.
-
 ## Resumos das Aulas
 
 Os resumos são pessoais e refletem o entendimento dos tópicos abordados em sala de aula. Eles podem ser úteis para revisão e estudo para provas e elaboração de futuros exercícios práticos.
