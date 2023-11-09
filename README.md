@@ -22,4 +22,4 @@ Os resumos são pessoais e refletem o entendimento dos tópicos abordados em sal
 Para clonar este repositório e visualizar os exercícios e resumos, use o seguinte comando:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio-de-grafos.git
+git clone https://github.com/gabrielsponda/Teoria-dos-Grafos
